@@ -3,6 +3,7 @@ import styles from "./Form.module.css";
 
 export default function Form() {
   const [name, setName] = useState("");
+  const [age, setAge] = useState("");
   const [description, setDescription] = useState("");
 
   const handleSubmit = async (e) => {
@@ -14,7 +15,7 @@ export default function Form() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, description }),
+        body: JSON.stringify({ name, age, description }),
       });
 
       const data = await response.json();
@@ -22,11 +23,13 @@ export default function Form() {
 
       //Nulstil form
       setName("");
+      setAge("");
       setDescription("");
     } catch (error) {
       console.error("Fejl", error);
     }
   };
+
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -40,13 +43,25 @@ export default function Form() {
           onChange={(e) => setName(e.target.value)}
         />
 
+        <label htmlFor="age">age</label>
+        <input
+          type="number"
+          name="age"
+          id="age"
+          className={styles.input}
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+          min="0"
+          max="120"
+        />
+
         <label htmlFor="description">description</label>
         <input
           type="text"
           name="description"
           id="description"
           className={styles.input}
-          value={name}
+          value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
 

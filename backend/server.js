@@ -11,7 +11,7 @@ let items = [];
 
 // POST
 app.post("/items", (req, res) => {
-  const { name, description } = req.body;
+  const { name, age, description } = req.body;
   const newItem = { id: items.length + 1, name, description };
   items.push(newItem);
   res.status(201).json(newItem);
@@ -35,9 +35,10 @@ app.get("/items/:id", (req, res) => {
 app.put("/items/:id", (req, res) => {
   const item = items.find((i) => i.id === parseInt(req.params.id));
   if (!item) return req.status(404).json({ message: "Item ikke fundet" });
-  const { name, description } = req.body;
+  const { name, age, description } = req.body;
 
   if (name) item.name = name;
+  if (age) item.age = age;
   if (description) item.description = description;
 
   res.json(item);

@@ -1,0 +1,11 @@
+.container {
+  width: 800px;
+  height: auto;
+  background-color: #ccc;
+  border: none;
+  border-radius: 10px;
+}
+
+.input {
+  width: 300px;
+}
