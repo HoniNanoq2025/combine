@@ -19,16 +19,16 @@ app.post("/items", (req, res) => {
 
 //READ: hent hele listen
 app.get("/items", (req, res) => {
-  req.json(items);
+  res.json(items);
 });
 
 // READ: Hent enkelt item
 app.get("/items/:id", (req, res) => {
-  const item = item.find((i) => i.id === parseInt(req.params.id));
+  const item = items.find((i) => i.id === parseInt(req.params.id));
 
   if (!item) return res.status(404).json({ messsage: "Item ikke fundet" });
 
-  req.json(item);
+  res.json(item);
 });
 
 //UPDATE
@@ -50,7 +50,7 @@ app.delete("/items/:id", (req, res) => {
   if (index === -1)
     return res.status(404).json({ message: "Item ikke fundet" });
 
-  item.slice(index, 1);
+  items.slice(index, 1);
 
   res.json({ message: "Item slettet" });
 });
