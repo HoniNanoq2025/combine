@@ -8,11 +8,12 @@ app.use(express.json());
 app.use(cors());
 
 let items = [];
+let nextId = 1;
 
 // POST
 app.post("/items", (req, res) => {
   const { name, age, description } = req.body;
-  const newItem = { id: items.length + 1, name, age, description };
+  const newItem = { id: nextId++, name, age, description };
   items.push(newItem);
   res.status(201).json(newItem);
 });
@@ -34,7 +35,7 @@ app.get("/items/:id", (req, res) => {
 //UPDATE
 app.put("/items/:id", (req, res) => {
   const item = items.find((i) => i.id === parseInt(req.params.id));
-  if (!item) return req.status(404).json({ message: "Item ikke fundet" });
+  if (!item) return res.status(404).json({ message: "Item ikke fundet" });
   const { name, age, description } = req.body;
 
   if (name) item.name = name;
@@ -51,7 +52,7 @@ app.delete("/items/:id", (req, res) => {
   if (index === -1)
     return res.status(404).json({ message: "Item ikke fundet" });
 
-  items.slice(index, 1);
+  items.splice(index, 1);
 
   res.json({ message: "Item slettet" });
 });

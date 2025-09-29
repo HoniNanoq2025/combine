@@ -36,7 +36,7 @@ export default function ItemDetails({ itemId, onDelete }) {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:3000/items${itemId}`, {
+      const response = await fetch(`http://localhost:3000/items/${itemId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
