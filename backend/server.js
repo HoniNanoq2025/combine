@@ -12,7 +12,7 @@ let items = [];
 // POST
 app.post("/items", (req, res) => {
   const { name, age, description } = req.body;
-  const newItem = { id: items.length + 1, name, description };
+  const newItem = { id: items.length + 1, name, age, description };
   items.push(newItem);
   res.status(201).json(newItem);
 });
